@@ -60,7 +60,7 @@ The example count is illustrative. The actual proposal is measured from the sele
 2k-law check --root /path/to/project --base FULL_ACCEPTED_BASE_COMMIT_SHA
 ```
 
-The base must be present locally and be a full lowercase commit SHA. No branch names or abbreviated identifiers are accepted. The engine reads the previous manifest and source directly from Git objects, with replacement refs and lazy fetch disabled. It compares each surviving oversized file against the **actual previous measurement**, not merely an old ceiling in the candidate manifest.
+The base must be present locally and be a full lowercase commit SHA. For base-backed checks, `--root` must be the Git repository's top-level directory, not an arbitrary subtree. No branch names or abbreviated identifiers are accepted. The engine reads the previous manifest and source directly from Git objects, with replacement refs and lazy fetch disabled. It compares each surviving oversized file against the **actual previous measurement**, not merely an old ceiling in the candidate manifest.
 
 After extracting code, `baseline` can produce the new measured ledger. Updating it cannot legalize a growth or a new oversized file: `check --base ...` compares it against the independently accepted base. Current entries must match current measurements exactly. Deleted/compliant paths must leave the ledger. Oversized renames receive no automatic allowance transfer in this version.
 

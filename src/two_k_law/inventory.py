@@ -128,10 +128,16 @@ def scan_worktree(root: Path) -> Inventory:
         top = Path(git(root, "rev-parse", "--show-toplevel").decode().strip()).resolve()
         if top != root:
             raise LawError("Selected root does not match its Git repository")
-        for raw in git(root, "ls-files", "-z").split(b"\0"):
+        for raw in git(root, "ls-files", "--stage", "-z").split(b"\0"):
             if raw:
-                path = raw.decode("utf-8", "strict")
-                if not excluded(path) and path not in seen:
+                metadata, raw_path = raw.split(b"\t", 1)
+                mode, _, stage = metadata.split()
+                path = raw_path.decode("utf-8", "strict")
+                if excluded(path):
+                    continue
+                if mode not in (b"100644", b"100755") or stage != b"0":
+                    raise LawError(f"Unsupported Git source mode or unresolved index stage: {path}")
+                if path not in seen:
                     raise LawError(f"Tracked source missing from inventory: {path}")
     result.files = dict(sorted(result.files.items()))
     result.exclusions = dict(sorted(result.exclusions.items()))

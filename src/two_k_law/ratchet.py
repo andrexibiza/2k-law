@@ -20,7 +20,9 @@ def strict_json(data: bytes):
         raise LawError(f"Non-finite JSON value: {value}")
     try:
         return json.loads(data.decode("utf-8"), object_pairs_hook=pairs, parse_constant=bad)
-    except (UnicodeError, json.JSONDecodeError) as exc:
+    except LawError:
+        raise
+    except (ValueError, RecursionError) as exc:
         raise LawError(f"Invalid UTF-8 JSON: {exc}") from exc
 
 

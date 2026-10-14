@@ -29,6 +29,9 @@ def git(root: Path, *args: str, input: bytes | None = None) -> bytes:
 def commit(root: Path, value: str) -> str:
     if not re.fullmatch(r"(?:[0-9a-f]{40}|[0-9a-f]{64})", value):
         raise LawError("--base must be a full lowercase commit SHA, not a branch or abbreviation")
+    top = Path(git(root, "rev-parse", "--show-toplevel").decode().strip()).resolve()
+    if top != root.resolve():
+        raise LawError("Base-backed checks require --root to equal the Git repository top-level")
     actual = git(root, "rev-parse", "--verify", value + "^{commit}").decode().strip()
     if actual != value:
         raise LawError("The requested base is not that exact commit")
