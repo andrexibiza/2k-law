@@ -1,6 +1,8 @@
 # The 2K Law
 
-**An architectural ratchet by Axl Ibiza, MBA.**
+**Original code and architecture by Axl Ibiza, MBA.**
+
+This repository contains my original standalone implementation of the 2K Law. It contains no copied or vendored Hermes Agent code and has no Hermes Agent dependency. Links to my earlier Hermes contributions document the history of my work—not code imported from another project.
 
 No repository-owned code file above 2,000 physical lines. Existing oversized files are explicit debt: they may shrink, never grow, and their allowances disappear when they reach the ceiling.
 
@@ -84,7 +86,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
-      - uses: andrexibiza/2k-law@v0.1.1
+      - uses: andrexibiza/2k-law@v0.1.2
 ```
 
 For legacy ratcheting, supply a trusted base and fetch its objects. A pull-request-only job can use GitHub's PR-object base SHA:
@@ -103,7 +105,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
           persist-credentials: false
-      - uses: andrexibiza/2k-law@v0.1.1
+      - uses: andrexibiza/2k-law@v0.1.2
         with:
           base: ${{ github.event.pull_request.base.sha }}
 ```
@@ -171,6 +173,6 @@ The suite includes boundary and rejection cases, real temporary Git histories, e
 
 ## Authorship and license
 
-The 2K Law, graph-gated engineering and adversarially verified transformation architecture were authored by **Axl Ibiza, MBA**. Hermes is the original documented case study, not the owner of the doctrine. This implementation is authored under that direction and retains links to the historical contributions and their actual integration status. Other contributors retain credit for their work.
+The code in this repository and the 2K Law, graph-gated engineering, and adversarially verified transformation architecture are original work by **Axl Ibiza, MBA**. Hermes is a documented case study and the repository where I published earlier contributions. This package is my standalone code, not a fork, port, or redistribution of Hermes Agent.
 
 MIT licensed. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
