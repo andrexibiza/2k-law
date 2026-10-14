@@ -1,0 +1,11 @@
+2K Law — Axl Ibiza, MBA
+
+The 2K Law and its graph-gated, adversarially verified transformation architecture
+are authored by Axl Ibiza, MBA, documented in All Gods Must Die (August 2026).
+This standalone implementation is a new implementation of that architecture,
+not a verbatim copy of the historical Hermes test suite.
+
+Historical implementation references remain credited to their original authors
+and project. The historical NousResearch/hermes-agent source was MIT licensed,
+with Copyright (c) 2025 Nous Research. No claim is made that those historical
+PRs were merged. See docs/PROVENANCE.md for exact public source revisions.

@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "2k-law"
+version = "0.1.0"
+description = "Axl's 2K Law: source-size enforcement, legacy burndown, and extraction evidence"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{name = "Axl Ibiza, MBA"}]
+dependencies = []
+
+[project.scripts]
+2k-law = "two_k_law.cli:main"
+
+[project.urls]
+Homepage = "https://axlibiza.com/learn/blind-witness-engine/"
+Repository = "https://github.com/andrexibiza/2k-law"
+
+[tool.setuptools.packages.find]
+where = ["src"]

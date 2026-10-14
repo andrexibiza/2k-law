@@ -1,0 +1,25 @@
+name: 2K Law
+description: Axl's source-size ceiling and trusted-base legacy burndown ratchet
+author: Axl Ibiza, MBA
+branding:
+  icon: git-pull-request
+  color: purple
+inputs:
+  path:
+    description: Checked-out repository root
+    required: false
+    default: .
+  base:
+    description: Full independently accepted base commit SHA, present locally; required for legacy debt
+    required: false
+    default: ''
+runs:
+  using: composite
+  steps:
+    - name: Check the 2K Law
+      shell: bash
+      env:
+        TWO_K_ROOT: ${{ inputs.path }}
+        TWO_K_BASE: ${{ inputs.base }}
+        TWO_K_ACTION_PATH: ${{ github.action_path }}
+      run: python -I "$TWO_K_ACTION_PATH/action_runner.py"
