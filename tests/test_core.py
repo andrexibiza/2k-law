@@ -12,7 +12,7 @@ from two_k_law.ratchet import baseline, check, parse_manifest
 class Project(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="two-k-law-")
-        self.root = Path(self.temp.name)
+        self.root = Path(self.temp.name).resolve()
         self.addCleanup(self.temp.cleanup)
 
     def put(self, name, data):
@@ -85,6 +85,10 @@ class Counting(Project):
     def test_prefix_does_not_exclude(self):
         self.put("node_modules_owned/code.py", "x\n" * 2001)
         self.assertEqual(check(self.root)["status"], "fail")
+
+    def test_root_aliases_are_canonicalized(self):
+        (self.root / "inner").mkdir()
+        self.assertEqual(project_root(self.root / "inner" / ".."), self.root)
 
     def test_missing_root_errors(self):
         with self.assertRaises(LawError): project_root(self.root / "absent")

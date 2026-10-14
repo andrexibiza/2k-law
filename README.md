@@ -84,7 +84,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
-      - uses: andrexibiza/2k-law@v0.1.0
+      - uses: andrexibiza/2k-law@v0.1.1
 ```
 
 For legacy ratcheting, supply a trusted base and fetch its objects. A pull-request-only job can use GitHub's PR-object base SHA:
@@ -103,7 +103,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
           persist-credentials: false
-      - uses: andrexibiza/2k-law@v0.1.0
+      - uses: andrexibiza/2k-law@v0.1.1
         with:
           base: ${{ github.event.pull_request.base.sha }}
 ```

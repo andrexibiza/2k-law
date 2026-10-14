@@ -37,4 +37,4 @@ jobs:
         with:
           persist-credentials: false
       - name: Consume the published version through GitHub Actions
-        uses: andrexibiza/2k-law@v0.1.0
+        uses: andrexibiza/2k-law@v0.1.1
